@@ -1,0 +1,28 @@
+{{canonical-adress}}
+{{amp-dateModified}}
+{{amp-image-full-adress}
+{{amp-headline}}
+{{amp-title}}
+{{amp-description}}
+{{amp-keywords}}
+{{amp-h1}}
+{{amp-img-cover}}
+{{amp-datetime-system}}
+{{amp-date-russian}}
+{{amp-cover}}
+{{amp-effective-date}}
+{{amp-number-of-page}}
+{{amp-price}}
+{{amp-table-of-contents}}
+{{amp-order-with-attributes}}
+{{amp-article}}
+
+В файл надо добавить через data-теги:
+номер (код) книги
+Если нормативный документ 
+для поля author
+
+тип - Organization
+name - к примеру, МЧС
+
+

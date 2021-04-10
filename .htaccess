@@ -1,0 +1,38 @@
+RewriteEngine on
+
+RewriteCond %{HTTP_HOST} ^www\.(.*)$ [NC]
+RewriteRule ^(.*)$ https://%1/$1 [R=301,L]
+
+RewriteCond %{HTTPS} off
+RewriteRule (.*) https://%{HTTP_HOST}%{REQUEST_URI} [NC,R=301,L]
+
+Redirect 301 /fire https://enp.by/zakonodatelstvo-o-pozharnoj-bezopasnosti/
+Redirect 301 /fire/ https://enp.by/zakonodatelstvo-o-pozharnoj-bezopasnosti/
+
+Redirect 301 /ozp https://enp.by/pravila-podgotovki-organizacij-k-otopitelnomu-sezonu-ego-provedeniya-i-zaversheniya/
+Redirect 301 /ozp/ https://enp.by/pravila-podgotovki-organizacij-k-otopitelnomu-sezonu-ego-provedeniya-i-zaversheniya/
+
+Redirect 301 /es https://enp.by/pravila-elektrosnabzheniya/
+Redirect 301 /es/ https://enp.by/pravila-elektrosnabzheniya/
+
+Redirect 301 /ptt https://enp.by/pravila-po-obespecheniyu-promyshlennoj-bezopasnosti-pri-ehkspluatacii-tekhnologicheskih-truboprovodov/
+Redirect 301 /ptt/ https://enp.by/pravila-po-obespecheniyu-promyshlennoj-bezopasnosti-pri-ehkspluatacii-tekhnologicheskih-truboprovodov/
+
+Redirect 301 /otz https://enp.by/ohrana-truda-v-zdravoohranenii/
+Redirect 301 /otz/ https://enp.by/ohrana-truda-v-zdravoohranenii/
+
+Redirect 301 /nk https://enp.by/nalogovyj-kodeks/
+Redirect 301 /nk/ https://enp.by/nalogovyj-kodeks/
+
+Redirect 301 /tk https://www.enp.by/trudovoj-kodeks/
+Redirect 301 /tk/ https://www.enp.by/trudovoj-kodeks/
+
+Redirect 301 /koap https://enp.by/kodeks-respubliki-belarus-ob-administrativnyh-pravonarusheniyah/
+Redirect 301 /koap/ https://enp.by/kodeks-respubliki-belarus-ob-administrativnyh-pravonarusheniyah/
+
+
+Redirect 301 /pikoap https://enp.by/processualno-ispolnitelnyj-kodeks-respubliki-belarus-ob-administrativnyh-pravonarusheniyah/
+Redirect 301 /pikoap/ https://enp.by/processualno-ispolnitelnyj-kodeks-respubliki-belarus-ob-administrativnyh-pravonarusheniyah/
+
+
+
