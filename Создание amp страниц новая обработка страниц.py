@@ -109,7 +109,9 @@ for str_num in range(14,rsheet.nrows):
     # !!!!!!!!!!!!!!! Следующую строку Включить после отладки
     url_z = '(No URL)' if hpl_z is None else hpl_z.url_or_path # полученную ссылку помещаем в переменную
     current_dir=os.getcwd() #запоминаем путь рабочего каталога
-    parent_dir=os.path.abspath(os.path.join(path, os.pardir)) #запоминаем путь родительского каталога (по отношению к рабочему)
+    parent_dir=os.path.abspath(os.path.join(__file__ ,"../../..")) #запоминаем путь родительского каталога (по отношению к рабочему)
+    #print (current_dir,'         ',parent_dir)
+    #input()
 
     if url_z != '(No URL)': #если ссылка не пустая
         check_folder=os.path.join(parent_dir, url_z.split('/')[3])
@@ -298,8 +300,8 @@ for str_num in range(14,rsheet.nrows):
                 with open ('amp.css' , 'r', encoding="utf-8") as fcss:
                     amp_css=fcss.read()
 
-                with open ('amp-template.html', 'r', encoding="utf-8") as fo:
-                    template=fo.read()
+                with open ('amp-template.html', 'r', encoding="utf-8") as famp:
+                    template=famp.read()
 
                 template=template.replace('{{amp-css}}', amp_css)
                 template=template.replace('{{canonical-adress}}',canonical_adress)
@@ -339,6 +341,55 @@ for str_num in range(14,rsheet.nrows):
 
                 with open(os.path.join(check_amp_folder,'amp-index.html'), 'w', encoding="utf-8") as fp:
                     fp.write(template)
+                    
+                    
+                    
+                    
+#********************************** Создаем адаптивную страницу******************************
+                with open ('index-template.html', 'r', encoding="utf-8") as fadapt:
+                    template=fadapt.read()
+
+                #template=template.replace('{{adapt-css}}', amp_css)
+                template=template.replace('{{amp-link}}',canonical_adress+'/amp')
+                template=template.replace('{{adapt-image-full-adress}}', amp_image_full_adress)
+                template=template.replace('{{adapt-dateModified}}', amp_dateModified)
+                template=template.replace('{{adapt-order-numb}}', kod_from_price)
+                template=template.replace('{{adapt-headline}}',amp_headline)
+                template=template.replace('{{adapt-title}}', amp_title)
+                template=template.replace('{{adapt-description}}', amp_description)
+                template=template.replace('{{adapt-keywords}}', amp_keywords)
+                template=template.replace('{{adapt-img-cover}}', amp_img_cover)
+                template=template.replace('{{adapt-alt-img-cover}}', amp_alt_img_cover)
+                template=template.replace('{{adapt-h1}}', amp_h1)
+
+                amp_remark=amp_remark.replace('<a href="','<a href="../')
+                amp_remark=amp_remark.replace("<a href='","<a href='../")
+                template=template.replace('{{adapt-remark}}', amp_remark)
+
+                template=template.replace('{{adapt-datetime-system}}', amp_datetime_system)
+                template=template.replace('{{adapt-date-russian}}', amp_date_russian)
+                template=template.replace('{{adapt-cover}}', amp_cover)
+                template=template.replace('{{adapt-discount}}', amp_discount)
+                template=template.replace('{{adapt-effective-date}}', amp_effective_date)
+                template=template.replace('{{adapt-number-of-page}}', amp_number_of_page)
+                template=template.replace('{{adapt-price}}', price_from_price)
+                template=template.replace('{{adapt-pdf-content}}', amp_pdf_content)
+                template=template.replace('{{adapt-order-with-attributes}}', amp_order_with_attributes)
+
+                amp_article=amp_article.replace('<a href="','<a href="../')
+                amp_article=amp_article.replace("<a href='","<a href='../")
+                template=template.replace('{{adapt-article}}', amp_article)
+
+
+                list_changed_url+=canonical_adress
+                list_changed_url+='amp\n'
+
+                with open(os.path.join(check_folder,'adapt-index.html'), 'w', encoding="utf-8") as fnew:
+                    fnew.write(template)                
+                
+                
+                
+                    
 
 
 
@@ -356,5 +407,3 @@ for str_num in range(14,rsheet.nrows):
 
 with open (os.path.join(current_dir, 'change.txt'), 'w', encoding="utf-8") as flikns:
     flikns.write(list_changed_url)
-
-
