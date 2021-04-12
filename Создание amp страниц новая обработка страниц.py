@@ -21,21 +21,10 @@ def extract_string_between_tag (searched_string, first_tag, second_tag=""):
         return ""
 
 
-
-
-
-
-
-
-
-
-
-
-
 # Копируем и передаем на сервер фалй прайса
 # Создаем новое имя для прайса, который скопируем на сервер. Оно включает дату
 now = str(datetime.datetime.now())
-print(str(now))
+#print(str(now))
 
 den=now[8:10]
 mes=now[5:7]
@@ -109,7 +98,7 @@ for str_num in range(14,rsheet.nrows):
     # !!!!!!!!!!!!!!! Следующую строку Включить после отладки
     url_z = '(No URL)' if hpl_z is None else hpl_z.url_or_path # полученную ссылку помещаем в переменную
     current_dir=os.getcwd() #запоминаем путь рабочего каталога
-    parent_dir=os.path.abspath(os.path.join(__file__ ,"../../..")) #запоминаем путь родительского каталога (по отношению к рабочему)
+    parent_dir=os.path.abspath(os.path.join(__file__ ,"../..")) #запоминаем путь родительского каталога (по отношению к рабочему)
     #print (current_dir,'         ',parent_dir)
     #input()
 
@@ -125,7 +114,9 @@ for str_num in range(14,rsheet.nrows):
                 #html_base=html_base.replace("\n", " ")
                 html_base=html_base.replace("  ", " ")
 
-                canonical_adress=url_z
+                canonical_adress=url_z.replace("index.html","")  #удаляем, если есть index.html
+                if canonical_adress[-1]!="/":
+                    canonical_adress+="/"
 
                 amp_title=extract_string_between_tag (html_base, "<title>", "</title>").strip() #{{amp-title}}
                 amp_title=amp_title.replace('&nbsp;',' ')
@@ -186,7 +177,7 @@ for str_num in range(14,rsheet.nrows):
                                            '&order_numb='+kod_from_price #{{amp-order-with-attributes}}
 
                 #Schet.html?title={{h1-with-span}}&price={{price}}&order_numb={{order-numb}}
-                print(amp_order_with_attributes)
+                #print(amp_order_with_attributes)
                 #input()
 
 
@@ -210,9 +201,12 @@ for str_num in range(14,rsheet.nrows):
 
 
                         elif table_row.upper().find('СКАЧАТЬ')>=0 or table_row.upper().find('PDF')>=0:
-                            amp_pdf_content=('<a href="../'+
-                            extract_string_between_tag(table_row,'<a href=', '.pdf')[1:]+'.pdf"')
+                            amp_pdf_content=(extract_string_between_tag(table_row,'<a href=', '.pdf')[1:]+'.pdf"')
                             amp_pdf_content+=' target="_blank">Оглавление и ознакомительный фрагмент</a>' #{{amp-pdf-content}}
+                            adapt_pdf_content='<a href="'+amp_pdf_content
+                            amp_pdf_content='<a href="../'+amp_pdf_content
+
+
 
                         elif table_row.upper().find('ПЕРЕПЛЕТ')>=0 or table_row.upper().find('ОБЛОЖКА')>=0:
                             amp_cover=extract_string_between_tag(table_row, '<td class="col75">', '</td>') #{{amp-cover}}
@@ -244,7 +238,9 @@ for str_num in range(14,rsheet.nrows):
                     amp_article=amp_article.replace(schet_for_replace, amp_order_with_attributes)
 
 
-
+                adapt_article=amp_article   # Потому, что в amp_article позже происходит замена ссылок     
+                adapt_remark=amp_remark
+                
                 # Формируем базу данных
                 # Записываем текст article и remark в файл html (для последующего редактирования)
 
@@ -316,7 +312,7 @@ for str_num in range(14,rsheet.nrows):
                 template=template.replace('{{amp-img-cover}}', amp_img_cover)
                 template=template.replace('{{amp-alt-img-cover}}', amp_alt_img_cover)
                 template=template.replace('{{amp-h1}}', amp_h1)
-
+                adapt_remark=amp_remark #Потому, что меняется длина ссылок (удлиняется путь к amp)
                 amp_remark=amp_remark.replace('<a href="','<a href="../')
                 amp_remark=amp_remark.replace("<a href='","<a href='../")
                 template=template.replace('{{amp-remark}}', amp_remark)
@@ -346,7 +342,7 @@ for str_num in range(14,rsheet.nrows):
                     
                     
 #********************************** Создаем адаптивную страницу******************************
-                with open ('index-template.html', 'r', encoding="utf-8") as fadapt:
+                with open ('adapt-template.html', 'r', encoding="utf-8") as fadapt:
                     template=fadapt.read()
 
                 #template=template.replace('{{adapt-css}}', amp_css)
@@ -361,10 +357,7 @@ for str_num in range(14,rsheet.nrows):
                 template=template.replace('{{adapt-img-cover}}', amp_img_cover)
                 template=template.replace('{{adapt-alt-img-cover}}', amp_alt_img_cover)
                 template=template.replace('{{adapt-h1}}', amp_h1)
-
-                amp_remark=amp_remark.replace('<a href="','<a href="../')
-                amp_remark=amp_remark.replace("<a href='","<a href='../")
-                template=template.replace('{{adapt-remark}}', amp_remark)
+                template=template.replace('{{adapt-remark}}', adapt_remark)
 
                 template=template.replace('{{adapt-datetime-system}}', amp_datetime_system)
                 template=template.replace('{{adapt-date-russian}}', amp_date_russian)
@@ -378,9 +371,9 @@ for str_num in range(14,rsheet.nrows):
 
                 amp_article=amp_article.replace('<a href="','<a href="../')
                 amp_article=amp_article.replace("<a href='","<a href='../")
-                template=template.replace('{{adapt-article}}', amp_article)
+                template=template.replace('{{adapt-article}}', adapt_article)
 
-
+                
                 list_changed_url+=canonical_adress
                 list_changed_url+='amp\n'
 
