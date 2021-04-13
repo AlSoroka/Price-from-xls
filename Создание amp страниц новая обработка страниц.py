@@ -21,67 +21,38 @@ def extract_string_between_tag (searched_string, first_tag, second_tag=""):
         return ""
 
 
-# Копируем и передаем на сервер фалй прайса
-# Создаем новое имя для прайса, который скопируем на сервер. Оно включает дату
 now = str(datetime.datetime.now())
-#print(str(now))
-
 den=now[8:10]
 mes=now[5:7]
 god=now[:4]
+ 
 
+# Дата и время внесения изменений
 date_mod=now[0:10]
 time_mod=now[11:19]
-
 amp_dateModified=now[0:10]+'T'+now[11:19]+'+03:00'
-#print('amp_dateModifie: ',amp_dateModified)
-
 amp_priceValidUntil=str(int(god)+1)+'-'+mes+'-'+den #{{amp-priceValidUntil}} Дата до которой действует цена в микроразметке
-#print(amp_priceValidUntil)
 
 
 
-new_name='Price Energopress TNPA '+den+'-'+mes+'-'+god+'.xls'
-new_nameJ='Price Energopress Journals '+den+'-'+mes+'-'+god+'.xls'
-#path=r'\\Buh\подписка\Прайсы'
-path=''
-price=r'Price Energopress TNPA 06-03-2021.xls'
-
-#Создаем HTML страницу из файла прайса
-
-#fp = open(os.path.join(path,'Прайс для сайта.html'), 'w')
-
-
-
-nazvanie=' '
-postanovlenie=' '
-cena="0.00"
-kol='  '
-idList=''
-
+# Создаем список проверенных файлов 
 list_changed_url=''
 
+# Пути к базовым каталогам
+current_dir=os.getcwd() #запоминаем путь рабочего каталога
+parent_dir=os.path.abspath(os.path.join(__file__ ,"../..")) #запоминаем путь родительского каталога (по отношению к рабочему)
 
 
-
-
-
-# Записываем дату обновления
-
-#Создаем заголовок таблицы
-
-
-
-
+price="Price Energopress TNPA 06-03-2021.xls"
+path=current_dir
 
 #Открываем файл Прайс.xls
 rbook = xlrd.open_workbook(os.path.join(path,price))
 # Получаем доступ к листу
 rsheet=rbook.sheet_by_index(0)
-i=0
-for str_num in range(14,rsheet.nrows):
-    i+=1
 
+# Читаем файл построчно
+for str_num in range(14,rsheet.nrows):
 #Читаем тело таблицы
     razdel=str(rsheet.cell(str_num,0).value)
     hpl_z=rsheet.hyperlink_map.get((str_num,3)) #получаем ссылку на html страницу
@@ -89,6 +60,7 @@ for str_num in range(14,rsheet.nrows):
     price_from_price=str(rsheet.cell(str_num,5).value)
     price_from_price=price_from_price.replace(",",".").strip()
     name_from_price=str(rsheet.cell(str_num,2).value).strip()
+    
 
     #******************** Строки для тестирования **************************
     #hpl_z='https://enp.by/tkp-458-459/'
@@ -97,33 +69,31 @@ for str_num in range(14,rsheet.nrows):
 
     # !!!!!!!!!!!!!!! Следующую строку Включить после отладки
     url_z = '(No URL)' if hpl_z is None else hpl_z.url_or_path # полученную ссылку помещаем в переменную
-    current_dir=os.getcwd() #запоминаем путь рабочего каталога
-    parent_dir=os.path.abspath(os.path.join(__file__ ,"../..")) #запоминаем путь родительского каталога (по отношению к рабочему)
-    #print (current_dir,'         ',parent_dir)
-    #input()
+    
+
 
     if url_z != '(No URL)': #если ссылка не пустая
+        canonical_adress=url_z.replace("index.html","")  #удаляем, если есть index.html
+        if canonical_adress[-1]!="/":
+            canonical_adress+="/"
+            
         check_folder=os.path.join(parent_dir, url_z.split('/')[3])
+        
         #формируем путь к проверяемому каталогу: родительский каталог + имя html каталога, полученное из ссылки
         check_amp_folder=os.path.join(check_folder, 'amp') # Путь к amp - папке в проверяемом каталоге
-
+        
         if  1==1: #not os.path.isdir(check_amp_folder):
-
             with open (os.path.join(check_folder,'index.html'), 'r', encoding="utf-8") as fl:
                 html_base=fl.read()
                 #html_base=html_base.replace("\n", " ")
                 html_base=html_base.replace("  ", " ")
 
-                canonical_adress=url_z.replace("index.html","")  #удаляем, если есть index.html
-                if canonical_adress[-1]!="/":
-                    canonical_adress+="/"
 
                 amp_title=extract_string_between_tag (html_base, "<title>", "</title>").strip() #{{amp-title}}
                 amp_title=amp_title.replace('&nbsp;',' ')
                 print('Title=',amp_title)
 
                 amp_headline=amp_title.strip()[:119]
-
                 amp_description = extract_string_between_tag (html_base, '<meta name="description" content=', '>').strip() #{{amp-description-content}}
 
 
@@ -373,18 +343,8 @@ for str_num in range(14,rsheet.nrows):
                 amp_article=amp_article.replace("<a href='","<a href='../")
                 template=template.replace('{{adapt-article}}', adapt_article)
 
-                
-                list_changed_url+=canonical_adress
-                list_changed_url+='amp\n'
-
                 with open(os.path.join(check_folder,'adapt-index.html'), 'w', encoding="utf-8") as fnew:
                     fnew.write(template)                
-                
-                
-                
-                    
-
-
 
 
                 for temp_keys in total_json:   # Удаляем знаки табуляции
