@@ -40,7 +40,8 @@ list_changed_url=''
 
 # Пути к базовым каталогам
 current_dir=os.getcwd() #запоминаем путь рабочего каталога
-parent_dir=os.path.abspath(os.path.join(__file__ ,"../..")) #запоминаем путь родительского каталога (по отношению к рабочему)
+parent_dir=os.path.abspath(os.path.join(os.path.dirname(__file__),"..")) #запоминаем путь родительского каталога (по отношению к рабочему)
+
 
 
 price="Price Energopress TNPA 21-03-2021.xls"
@@ -58,7 +59,7 @@ with open (os.path.join(os.path.dirname(__file__),'sitemap.xml'), 'r', encoding=
 rbook = xlrd.open_workbook(os.path.join(path,price))
 # Получаем доступ к листу
 rsheet=rbook.sheet_by_index(0)
-
+j=0
 # Читаем файл построчно
 for str_num in range(14,rsheet.nrows):
 #Читаем тело таблицы
@@ -81,6 +82,7 @@ for str_num in range(14,rsheet.nrows):
     url_z = '(No URL)' if hpl_z is None else hpl_z.url_or_path # полученную ссылку помещаем в переменную
 
     if url_z != '(No URL)': #если ссылка не пустая
+        j+=1
         canonical_adress=url_z.replace("index.html","")  #удаляем, если есть index.html
         if canonical_adress[-1]!="/":
             canonical_adress+="/"
@@ -89,6 +91,10 @@ for str_num in range(14,rsheet.nrows):
         #формируем путь к проверяемому каталогу: родительский каталог + имя html каталога, полученное из ссылки
         
         check_amp_folder=os.path.join(check_folder, 'amp') # Путь к amp - папке в проверяемом каталоге
+        
+
+
+        
         
         if  1==1: #not os.path.isdir(check_amp_folder):
             with open (os.path.join(check_folder,'index.html'), 'r', encoding="utf-8") as fl:
@@ -320,9 +326,33 @@ for str_num in range(14,rsheet.nrows):
 
                 list_changed_url+=canonical_adress
                 list_changed_url+='amp\n'
-                list_changed_url+=check_folder
-                list_changed_url+='\n'
+                #list_changed_url+=check_folder
+                #list_changed_url+='\n'
+                # Записываем amp  файл в новый каталог
+                new_folder=os.path.join(os.path.dirname(__file__), 'new')
 
+                new_folder=os.path.join(new_folder,  url_z.split('/')[3])
+
+                if  not os.path.exists (new_folder):
+                   os.mkdir(new_folder)     
+                                   
+                new_amp_folder=os.path.join(new_folder, 'amp')
+                if not os.path.exists (new_amp_folder):
+                    os.mkdir(new_amp_folder)     
+
+
+
+
+                with open(os.path.join(new_amp_folder,'index.html'), 'w', encoding="utf-8") as fp:
+                    fp.write(template)    
+
+
+
+                with open(os.path.join(check_amp_folder,'amp-index.html'), 'w', encoding="utf-8") as fp:
+                    fp.write(template)
+
+                
+                
                 with open(os.path.join(check_amp_folder,'amp-index.html'), 'w', encoding="utf-8") as fp:
                     fp.write(template)
                     
@@ -362,7 +392,10 @@ for str_num in range(14,rsheet.nrows):
                 template=template.replace('{{adapt-article}}', adapt_article)
 
                 with open(os.path.join(check_folder,'adapt-index.html'), 'w', encoding="utf-8") as fnew:
-                    fnew.write(template)                
+                    fnew.write(template)       
+
+                with open(os.path.join(new_folder,'index.html'), 'w', encoding="utf-8") as fp:
+                    fp.write(template)           
 
 
                 for temp_keys in total_json:   # Удаляем знаки табуляции
@@ -376,6 +409,9 @@ for str_num in range(14,rsheet.nrows):
                     json.dump(total_json, js, ensure_ascii=False, indent=4)
                 #    js.write(total_json_string.decode())
                 
+
+
+
                 # проверяем, есть ли ссылка в sitemap.xml    
                 beg=temp_map.find(canonical_adress)
                 if beg>-1:
@@ -393,3 +429,4 @@ with open (os.path.join(current_dir, 'change.txt'), 'w', encoding="utf-8") as fl
 
 with open (os.path.join(current_dir, 'new_sitemap.xml'), 'w', encoding="utf-8") as fsitemap:
     fsitemap.write(temp_map)
+    print (j)
