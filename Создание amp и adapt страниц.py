@@ -43,8 +43,16 @@ current_dir=os.getcwd() #запоминаем путь рабочего ката
 parent_dir=os.path.abspath(os.path.join(__file__ ,"../..")) #запоминаем путь родительского каталога (по отношению к рабочему)
 
 
-price="Price Energopress TNPA 06-03-2021.xls"
+price="Price Energopress TNPA 21-03-2021.xls"
 path=current_dir
+
+# Открываем и читаем сайтмап
+with open (os.path.join(os.path.dirname(__file__),'sitemap.xml'), 'r', encoding="utf-8") as fsitemap:
+    temp_map=fsitemap.read()
+
+
+
+
 
 #Открываем файл Прайс.xls
 rbook = xlrd.open_workbook(os.path.join(path,price))
@@ -367,6 +375,21 @@ for str_num in range(14,rsheet.nrows):
                 with open (os.path.join(check_folder,'json.txt'), 'w', encoding="utf-8") as js:
                     json.dump(total_json, js, ensure_ascii=False, indent=4)
                 #    js.write(total_json_string.decode())
+                
+                # проверяем, есть ли ссылка в sitemap.xml    
+                beg=temp_map.find(canonical_adress)
+                if beg>-1:
+                    beg_old_time=temp_map.find('<lastmod>', beg)
+                    end__old_time=temp_map.find('</lastmod>', beg)+len('</lastmod>')
+                    old_date=temp_map[beg_old_time:end__old_time]
+                    print (old_date)
+                    print('<lastmod>'+amp_dateModified+'</lastmod>')
+                    temp_map=temp_map[:beg_old_time]+'    <lastmod>'+amp_dateModified+'</lastmod>'+temp_map[end__old_time:]
+                    
+                    
 
 with open (os.path.join(current_dir, 'change.txt'), 'w', encoding="utf-8") as flikns:
     flikns.write(list_changed_url)
+
+with open (os.path.join(current_dir, 'new_sitemap.xml'), 'w', encoding="utf-8") as fsitemap:
+    fsitemap.write(temp_map)
