@@ -189,20 +189,27 @@ for str_num in range(14,rsheet.nrows):
 
                 amp_article=extract_string_between_tag (html_base,'<article>','</article>') #{{amp-article}}
 
-#  offical может не быть вообще, может быть внутри article (в новых файлах), может быть отдельным блоком в старых
+# В новых файлах <div class="official"> находится внутри article 
+#  offical может не быть вообще ЕСТЬ!, может быть внутри article (в новых файлах), может быть отдельным блоком в старых
 
-                # В новых файлах <div class="official"> находится внутри article 
-                if amp_article.find('Скачать официальный текст')==-1 and amp_article.find('<div class="official')==-1:
+                
+                if html_base.find('Скачать официальный текст')==-1 \
+                or amp_article.find('Скачать официальный текст')>-1\
+                or amp_article.find('<div class="official')>-1: 
+                # если нет вообще или уже внутри <article>, то добавляем в article все, что между <article> и <footer>
+                    amp_after_article=extract_string_between_tag (html_base,'</article>', '<footer>').strip()
+                    amp_after_article=amp_after_article.replace('</div>', ' ').strip()
+                    amp_article=amp_article+'\n'+amp_after_article
+                else:
+                    # между </article> и  официальным текстом:
                     amp_after_article=extract_string_between_tag (html_base,'</article>', '<div class="official">').strip()
                     amp_after_article=amp_after_article.replace('</div>', ' ').strip()
                     amp_article=amp_article+'\n'+amp_after_article
+                    # Сам официальный текст 
                     amp_offical='<div class="official">\n'+extract_string_between_tag (html_base,'<div class="official">','</table>')+'</table>\n</div>\n</div>'
                     amp_offical=amp_offical.replace('style="font-size:75%"','')
                     amp_offical=amp_offical.replace('h2>', 'h3>')
                     amp_article=amp_article+'\n'+amp_offical
-                else:
-                    amp_after_article=extract_string_between_tag (html_base,'</article>', '<footer>').strip()
-                    amp_after_article=amp_after_article.replace('</div>', ' ').strip()
 
                 schet_for_replace=extract_string_between_tag(amp_article, 'Schet.html?title=', '"')
                 if len(schet_for_replace)>0:
@@ -219,13 +226,13 @@ for str_num in range(14,rsheet.nrows):
 
                     fhtml.write('<!--******************************Remark******************************-->\n')
                     fhtml.write('<remark>\n\t')
-                    fhtml.write(amp_remark.replace('\n','\n\t')+'\n')
+                    fhtml.write(adapt_remark.replace('\n','\n\t')+'\n')
                     fhtml.write('</remark>\n')
                     fhtml.write('<!--******************************Article******************************-->\n')
                     fhtml.write('<article>\n\t')
-                    fhtml.write(amp_article.replace('\n','\n\t')+'\n')
+                    fhtml.write(adapt_article.replace('\n','\n\t')+'\n')
                     fhtml.write('</article>')
-                    fhtml.write('</body')
+                    
 
 
                 file_amp_remark=file_amp_article=str(os.path.join(check_folder,'remark-and_article.html'))
