@@ -128,10 +128,8 @@ for str_num in range(14,rsheet.nrows):
 
 
 
-                if html_base.find('<time datetime="')>=0:
-                    amp_datetime_system=extract_string_between_tag (html_base,'<time datetime="','">') #{{amp-datetime-system}}
-                else:
-                     amp_datetime_system=date_mod
+
+                amp_datetime_system=date_mod
                 months=['января', 'февраля', 'марта','апреля','мая','июня','июля','августа','сентября','октября','ноября','декабря']
                 amp_date_russian=amp_datetime_system.split('-')[2]+'&nbsp;'+months[int(amp_datetime_system.split('-')[1])-1]+' '+amp_datetime_system.split('-')[0]+'&nbsp;г.'
 
@@ -330,11 +328,14 @@ for str_num in range(14,rsheet.nrows):
                 #list_changed_url+='\n'
                 # Записываем amp  файл в новый каталог
                 new_folder=os.path.join(os.path.dirname(__file__), 'new')
+                
+                if  not os.path.exists (new_folder):  #Если нет каталога new, создаем его
+                   os.mkdir(new_folder)     
 
                 new_folder=os.path.join(new_folder,  url_z.split('/')[3])
-
+    
                 if  not os.path.exists (new_folder):
-                   os.mkdir(new_folder)     
+                   os.mkdir(new_folder)     #создаем  папку документа в каталоге new
                                    
                 new_amp_folder=os.path.join(new_folder, 'amp')
                 if not os.path.exists (new_amp_folder):
