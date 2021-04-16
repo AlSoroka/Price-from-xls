@@ -83,7 +83,9 @@ for str_num in range(14,rsheet.nrows):
 
     if url_z != '(No URL)': #если ссылка не пустая
         j+=1
-        canonical_adress=url_z.replace("index.html","")  #удаляем, если есть index.html
+        canonical_adress=url_z.replace("index.html","") #удаляем, если есть index.html
+        canonical_adress=canonical_adress.replace('www.', '') #удаляем, если есть www.
+        canonical_adress=canonical_adress.replace('http:', 'https:') #заменяем, если есть http:.          
         if canonical_adress[-1]!="/":
             canonical_adress+="/"
             
@@ -142,7 +144,7 @@ for str_num in range(14,rsheet.nrows):
                     if temp_string.find ('id="cover"')>=0:
                         amp_img_cover=extract_string_between_tag (temp_string, 'src="', '"')
                         amp_alt_img_cover=extract_string_between_tag (temp_string, 'alt="', '"')
-                amp_image_full_adress=canonical_adress+'/'+amp_img_cover
+                amp_image_full_adress=canonical_adress+amp_img_cover
 
 
                 if html_base.find('<table id="detailed">')>=0:
@@ -297,8 +299,8 @@ for str_num in range(14,rsheet.nrows):
                 template=template.replace('{{amp-order-numb}}', kod_from_price)
                 template=template.replace('{{amp-headline}}',amp_headline)
                 template=template.replace('{{amp-title}}', amp_title)
-                template=template.replace('{{amp-description}}', amp_description)
-                template=template.replace('{{amp-keywords}}', amp_keywords)
+                template=template.replace('{{amp-description}}', amp_description.replace('"',''))
+                template=template.replace('{{amp-keywords}}', amp_keywords.replace('"',''))
                 template=template.replace('{{amp-img-cover}}', amp_img_cover)
                 template=template.replace('{{amp-alt-img-cover}}', amp_alt_img_cover)
                 template=template.replace('{{amp-h1}}', amp_h1)
@@ -371,8 +373,8 @@ for str_num in range(14,rsheet.nrows):
                 template=template.replace('{{adapt-order-numb}}', kod_from_price)
                 template=template.replace('{{adapt-headline}}',amp_headline)
                 template=template.replace('{{adapt-title}}', amp_title)
-                template=template.replace('{{adapt-description}}', amp_description)
-                template=template.replace('{{adapt-keywords}}', amp_keywords)
+                template=template.replace('{{adapt-description}}', amp_description.replace('"',''))
+                template=template.replace('{{adapt-keywords}}', amp_keywords.replace('"',''))
                 template=template.replace('{{adapt-img-cover}}', amp_img_cover)
                 template=template.replace('{{adapt-alt-img-cover}}', amp_alt_img_cover)
                 template=template.replace('{{adapt-h1}}', amp_h1)
