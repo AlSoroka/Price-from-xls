@@ -1,6 +1,6 @@
-Sub ФормированиеСписков()
+Sub ÔîðìèðîâàíèåÑïèñêîâ()
 '
-' ФормированиеСписков Макрос
+' ÔîðìèðîâàíèåÑïèñêîâ Ìàêðîñ
 '
 '
     Selection.Find.ClearFormatting
@@ -11,7 +11,7 @@ Sub ФормированиеСписков()
     End With
 
     With Selection.Find
-        .Text = "(:^13)([а-я])"
+        .Text = "(:^13)([à-ÿ])"
         .Replacement.Text = "\1<ul>^p<li>\2"
         .Forward = True
         .Wrap = wdFindAsk
@@ -51,9 +51,9 @@ Sub ФормированиеСписков()
     
     Selection.Find.Execute Replace:=wdReplaceAll
 End Sub
-Sub ЗаменаПробелов()
+Sub ÇàìåíàÏðîáåëîâ()
 '
-' ЗаменаПробелов Макрос
+' ÇàìåíàÏðîáåëîâ Ìàêðîñ
 '
 '
     Selection.Find.ClearFormatting
@@ -63,7 +63,7 @@ Sub ЗаменаПробелов()
         .AllCaps = False
     End With
     With Selection.Find
-        .Text = "(<[А-Яа-я]{1;3}) "
+        .Text = "(<[À-ßà-ÿ]{1;3}) "
         .Replacement.Text = "\1^s"
         .Forward = True
         .Wrap = wdFindAsk
@@ -83,7 +83,7 @@ Sub ЗаменаПробелов()
         .AllCaps = False
     End With
     With Selection.Find
-        .Text = "(<[А-Яа-я]{1;3}) "
+        .Text = "(<[À-ßà-ÿ]{1;3}) "
         .Replacement.Text = "\1^s"
         .Forward = True
         .Wrap = wdFindAsk
@@ -95,9 +95,9 @@ Sub ЗаменаПробелов()
         .MatchWildcards = True
     End With
 End Sub
-Sub Абзацы()
+Sub Àáçàöû()
 '
-' Абзацы Макрос
+' Àáçàöû Ìàêðîñ
 '
 '
     Selection.Find.ClearFormatting
@@ -107,7 +107,7 @@ Sub Абзацы()
         .AllCaps = False
     End With
     With Selection.Find
-        .Text = "^13([0-9А-Я])"
+        .Text = "^13([0-9À-ß])"
         .Replacement.Text = "^p" & ChrW(9825) & "<p>\1"
         .Forward = True
         .Wrap = wdFindContinue
@@ -140,4 +140,96 @@ Sub Абзацы()
     End With
     Selection.Find.Execute Replace:=wdReplaceAll
     
+End Sub
+Sub ÃëàâûÈñòàòüè()
+'
+' ÃëàâûÈñòàòüè Ìàêðîñ
+'
+'
+    Selection.Find.ClearFormatting
+    Selection.Find.Style = ActiveDocument.Styles("chapter")
+    Selection.Find.Replacement.ClearFormatting
+    With Selection.Find
+        .Text = "(*)^13"
+        .Replacement.Text = "<h3>\1</h3>^p"
+        .Forward = True
+        .Wrap = wdFindContinue
+        .Format = True
+        .MatchCase = False
+        .MatchWholeWord = False
+        .MatchAllWordForms = False
+        .MatchSoundsLike = False
+        .MatchWildcards = True
+    End With
+    Selection.Find.Execute Replace:=wdReplaceAll
+    Selection.Find.ClearFormatting
+    Selection.Find.Style = ActiveDocument.Styles("chapter")
+    Selection.Find.Replacement.ClearFormatting
+        With Selection.Find
+        .Text = "^l"
+        .Replacement.Text = "<br>^l"
+        .Forward = True
+        .Wrap = wdFindContinue
+        .Format = True
+        .MatchCase = False
+        .MatchWholeWord = False
+        .MatchAllWordForms = False
+        .MatchSoundsLike = False
+        .MatchWildcards = True
+    End With
+    Selection.Find.Execute Replace:=wdReplaceAll
+    Selection.Find.ClearFormatting
+    Selection.Find.Style = ActiveDocument.Styles("article")
+    Selection.Find.Replacement.ClearFormatting
+    With Selection.Find
+        .Text = "(*)^13"
+        .Replacement.Text = "<h4>\1</h4>^p"
+        .Forward = True
+        .Wrap = wdFindContinue
+        .Format = True
+        .MatchCase = False
+        .MatchWholeWord = False
+        .MatchAllWordForms = False
+        .MatchSoundsLike = False
+        .MatchWildcards = True
+    End With
+    Selection.Find.Execute Replace:=wdReplaceAll
+End Sub
+Sub ÇàãîëîâêèÈïîäïèñü()
+'
+' ÇàãîëîâêèÈïîäïèñü Ìàêðîñ
+'
+'
+    Selection.MoveUp Unit:=wdLine, Count:=2
+    Selection.Find.ClearFormatting
+    Selection.Find.Style = ActiveDocument.Styles("prinodobren")
+    Selection.Find.Replacement.ClearFormatting
+    With Selection.Find
+        .Text = "(*)^13"
+        .Replacement.Text = "<p class=""prinodobren"">\1</p>^p"
+        .Forward = True
+        .Wrap = wdFindContinue
+        .Format = True
+        .MatchCase = False
+        .MatchWholeWord = False
+        .MatchAllWordForms = False
+        .MatchSoundsLike = False
+        .MatchWildcards = True
+    End With
+    Selection.Find.Execute Replace:=wdReplaceAll
+    Selection.Find.ClearFormatting
+    Selection.Find.Style = ActiveDocument.Styles("Íàçâàíèå1")
+    Selection.Find.Replacement.ClearFormatting
+    With Selection.Find
+        .Text = "(*)^13"
+        .Replacement.Text = "<h2>\1</h2>^p"
+        .Forward = True
+        .Wrap = wdFindContinue
+        .Format = True
+        .MatchCase = False
+        .MatchWholeWord = False
+        .MatchAllWordForms = False
+        .MatchSoundsLike = False
+        .MatchWildcards = True
+    End With
 End Sub
