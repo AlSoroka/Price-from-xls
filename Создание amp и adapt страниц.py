@@ -103,6 +103,8 @@ for str_num in range(14,rsheet.nrows):
                 html_base=fl.read()
                 #html_base=html_base.replace("\n", " ")
                 html_base=html_base.replace("  ", " ")
+                html_base=html_base.replace("balnk", "blank") # замеченные опечатки в наименовании тегов
+
 
 
                 amp_title=extract_string_between_tag (html_base, "<title>", "</title>").strip() #{{amp-title}}
@@ -189,8 +191,6 @@ for str_num in range(14,rsheet.nrows):
                             amp_pdf_content+=' target="_blank">Оглавление и ознакомительный фрагмент</a>' #{{amp-pdf-content}}
                             adapt_pdf_content='<a href="'+amp_pdf_content
                             amp_pdf_content='<a href="../'+amp_pdf_content
-
-
 
                         elif table_row.upper().find('ПЕРЕПЛЕТ')>=0 or table_row.upper().find('ОБЛОЖКА')>=0:
                             amp_cover=extract_string_between_tag(table_row, '<td class="col75">', '</td>') #{{amp-cover}}
