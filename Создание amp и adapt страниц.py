@@ -367,7 +367,7 @@ for str_num in range(14,rsheet.nrows):
                     template=fadapt.read()
 
                 #template=template.replace('{{adapt-css}}', amp_css)
-                template=template.replace('{{amp-link}}',canonical_adress+'/amp')
+                template=template.replace('{{amp-link}}',canonical_adress+'amp')
                 template=template.replace('{{adapt-image-full-adress}}', amp_image_full_adress)
                 template=template.replace('{{adapt-dateModified}}', amp_dateModified)
                 template=template.replace('{{adapt-order-numb}}', kod_from_price)
