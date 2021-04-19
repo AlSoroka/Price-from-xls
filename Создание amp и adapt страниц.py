@@ -104,6 +104,9 @@ for str_num in range(14,rsheet.nrows):
                 #html_base=html_base.replace("\n", " ")
                 html_base=html_base.replace("  ", " ")
                 html_base=html_base.replace("balnk", "blank") # замеченные опечатки в наименовании тегов
+                match=re.search('<'+r'\w\d{8}'+'>', html_base) # удаление похожих на теги элементов в спике изменений типа <C12345678>
+                if not match is None:
+                    html_base=re.sub('<'+r'\w\d{8}'+'>', '', html_base)
 
 
 
@@ -345,7 +348,7 @@ for str_num in range(14,rsheet.nrows):
 
 
 
-
+                
                 with open(os.path.join(new_amp_folder,'index.html'), 'w', encoding="utf-8") as fp:
                     fp.write(template)    
 
@@ -358,7 +361,7 @@ for str_num in range(14,rsheet.nrows):
                 
                 with open(os.path.join(check_amp_folder,'amp-index.html'), 'w', encoding="utf-8") as fp:
                     fp.write(template)
-                    
+                
                     
                     
                     
@@ -393,25 +396,25 @@ for str_num in range(14,rsheet.nrows):
                 amp_article=amp_article.replace('<a href="','<a href="../')
                 amp_article=amp_article.replace("<a href='","<a href='../")
                 template=template.replace('{{adapt-article}}', adapt_article)
-
+                
                 with open(os.path.join(check_folder,'adapt-index.html'), 'w', encoding="utf-8") as fnew:
                     fnew.write(template)       
 
                 with open(os.path.join(new_folder,'index.html'), 'w', encoding="utf-8") as fp:
                     fp.write(template)           
 
-
+                
                 for temp_keys in total_json:   # Удаляем знаки табуляции
                     total_json[temp_keys]=total_json[temp_keys].replace('\t','')
                 #total_json_string=json.dumps(total_json, ensure_ascii=False).encode('utf8')
 
                 if not os.path.exists(check_amp_folder):
                     os.mkdir(check_amp_folder)
-
+               
                 with open (os.path.join(check_folder,'json.txt'), 'w', encoding="utf-8") as js:
                     json.dump(total_json, js, ensure_ascii=False, indent=4)
                 #    js.write(total_json_string.decode())
-                
+               
 
 
 
