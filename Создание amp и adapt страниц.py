@@ -104,6 +104,7 @@ for str_num in range(14,rsheet.nrows):
                 #html_base=html_base.replace("\n", " ")
                 html_base=html_base.replace("  ", " ")
                 html_base=html_base.replace("balnk", "blank") # замеченные опечатки в наименовании тегов
+                html_base=html_base.replace("traget", "target") # замеченные опечатки в наименовании тегов
                 match=re.search('<'+r'\w\d{8}'+'>', html_base) # удаление похожих на теги элементов в спике изменений типа <C12345678>
                 if not match is None:
                     html_base=re.sub('<'+r'\w\d{8}'+'>', '', html_base)
