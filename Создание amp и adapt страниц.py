@@ -161,7 +161,7 @@ for str_num in range(14,rsheet.nrows):
 
 
 
-                amp_order_with_attributes='Schet.html?title='+name_from_price+\
+                amp_order_with_attributes='Schet.html?title='+name_from_price.replace('"',' ').strip()+\
                                            '&price='+price_from_price+\
                                            '&order_numb='+kod_from_price #{{amp-order-with-attributes}}
 
@@ -228,9 +228,9 @@ for str_num in range(14,rsheet.nrows):
                     amp_offical=amp_offical.replace('h2>', 'h3>')
                     amp_article=amp_article+'\n'+amp_offical
 
-                schet_for_replace=extract_string_between_tag(amp_article, 'Schet.html?title=', '"')
-                if len(schet_for_replace)>0:
-                    amp_article=amp_article.replace(schet_for_replace, amp_order_with_attributes)
+                schet_for_replace=extract_string_between_tag(amp_article, 'a href="', '"')
+                if schet_for_replace.find('Schet')>-1:
+                    amp_article=amp_article.replace(schet_for_replace, '../stat/'+amp_order_with_attributes)
 
 
                 adapt_article=amp_article   # Потому, что в amp_article позже происходит замена ссылок     
@@ -390,7 +390,7 @@ for str_num in range(14,rsheet.nrows):
                 template=template.replace('{{adapt-effective-date}}', amp_effective_date)
                 template=template.replace('{{adapt-number-of-page}}', amp_number_of_page)
                 template=template.replace('{{adapt-price}}', price_from_price)
-                template=template.replace('{{adapt-pdf-content}}', amp_pdf_content)
+                template=template.replace('{{adapt-pdf-content}}', adapt_pdf_content)
                 template=template.replace('{{adapt-order-with-attributes}}', amp_order_with_attributes)
 
                 amp_article=amp_article.replace('<a href="','<a href="../')
