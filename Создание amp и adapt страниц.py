@@ -104,6 +104,7 @@ for str_num in range(14,rsheet.nrows):
                 #html_base=html_base.replace("\n", " ")
                 html_base=html_base.replace("  ", " ")
                 html_base=html_base.replace("balnk", "blank") # замеченные опечатки в наименовании тегов
+                html_base=html_base.replace("traget", "target") # замеченные опечатки в наименовании тегов
                 match=re.search('<'+r'\w\d{8}'+'>', html_base) # удаление похожих на теги элементов в спике изменений типа <C12345678>
                 if not match is None:
                     html_base=re.sub('<'+r'\w\d{8}'+'>', '', html_base)
@@ -161,7 +162,7 @@ for str_num in range(14,rsheet.nrows):
 
 
 
-                amp_order_with_attributes='Schet.html?title='+name_from_price.replace('"',' ').strip()+\
+                amp_order_with_attributes='Schet.html?title='+name_from_price.replace('"',' ').replace('  ',' ').strip()+\
                                            '&price='+price_from_price+\
                                            '&order_numb='+kod_from_price #{{amp-order-with-attributes}}
 
