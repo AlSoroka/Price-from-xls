@@ -1,3 +1,5 @@
+
+
 import xlrd
 import re
 import time
@@ -232,7 +234,7 @@ for str_num in range(14,rsheet.nrows):
                 schet_for_replace=extract_string_between_tag(amp_article, 'a href="', '"')
                 if schet_for_replace.find('Schet')>-1:
                     amp_article=amp_article.replace(schet_for_replace, '../stat/'+amp_order_with_attributes)
-
+                tag_for_replace=extract_string_between_tag(amp_article, r'<a href=', r'>')   
 
                 adapt_article=amp_article   # Потому, что в amp_article позже происходит замена ссылок     
                 adapt_remark=amp_remark
@@ -425,8 +427,8 @@ for str_num in range(14,rsheet.nrows):
                     beg_old_time=temp_map.find('<lastmod>', beg)
                     end__old_time=temp_map.find('</lastmod>', beg)+len('</lastmod>')
                     old_date=temp_map[beg_old_time:end__old_time]
-                    print (old_date)
-                    print('<lastmod>'+amp_dateModified+'</lastmod>')
+                    #print (old_date)
+                    #print('<lastmod>'+amp_dateModified+'</lastmod>')
                     temp_map=temp_map[:beg_old_time]+'    <lastmod>'+amp_dateModified+'</lastmod>'+temp_map[end__old_time:]
                     
                     
@@ -436,4 +438,4 @@ with open (os.path.join(current_dir, 'change.txt'), 'w', encoding="utf-8") as fl
 
 with open (os.path.join(current_dir, 'new_sitemap.xml'), 'w', encoding="utf-8") as fsitemap:
     fsitemap.write(temp_map)
-    print (j)
+    #print (j)
