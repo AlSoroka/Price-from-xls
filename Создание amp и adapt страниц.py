@@ -1,4 +1,5 @@
-
+'''
+'''
 
 import xlrd
 import re
@@ -27,7 +28,7 @@ now = str(datetime.datetime.now())
 den=now[8:10]
 mes=now[5:7]
 god=now[:4]
- 
+
 
 # Дата и время внесения изменений
 date_mod=now[0:10]
@@ -37,7 +38,7 @@ amp_priceValidUntil=str(int(god)+1)+'-'+mes+'-'+den #{{amp-priceValidUntil}} Д�
 
 
 
-# Создаем список проверенных файлов 
+# Создаем список проверенных файлов
 list_changed_url=''
 
 # Пути к базовым каталогам
@@ -46,7 +47,7 @@ parent_dir=os.path.abspath(os.path.join(os.path.dirname(__file__),"..")) #зап
 
 
 
-price="Price Energopress TNPA 21-03-2021.xls"
+price="Price Energopress TNPA 01-07-2021.xls"
 path=current_dir
 
 # Открываем и читаем сайтмап
@@ -71,9 +72,9 @@ for str_num in range(14,rsheet.nrows):
     price_from_price=rsheet.cell(str_num,5).value
     if isinstance(price_from_price, float):
         price_from_price=f'{price_from_price:,.2f}'  # Преобразование для двух знаков после запятой для чисел типа 31.10. Без него сжимает до 31.1
-    
+
     name_from_price=str(rsheet.cell(str_num,2).value).strip()
-    
+
 
     #******************** Строки для тестирования **************************
     #hpl_z='https://enp.by/tkp-458-459/'
@@ -87,19 +88,19 @@ for str_num in range(14,rsheet.nrows):
         j+=1
         canonical_adress=url_z.replace("index.html","") #удаляем, если есть index.html
         canonical_adress=canonical_adress.replace('www.', '') #удаляем, если есть www.
-        canonical_adress=canonical_adress.replace('http:', 'https:') #заменяем, если есть http:.          
+        canonical_adress=canonical_adress.replace('http:', 'https:') #заменяем, если есть http:.
         if canonical_adress[-1]!="/":
             canonical_adress+="/"
-            
+
         check_folder=os.path.join(parent_dir, url_z.split('/')[3])
         #формируем путь к проверяемому каталогу: родительский каталог + имя html каталога, полученное из ссылки
-        
+
         check_amp_folder=os.path.join(check_folder, 'amp') # Путь к amp - папке в проверяемом каталоге
-        
 
 
-        
-        
+
+
+
         if  1==1: #not os.path.isdir(check_amp_folder):
             with open (os.path.join(check_folder,'index.html'), 'r', encoding="utf-8") as fl:
                 html_base=fl.read()
@@ -209,13 +210,13 @@ for str_num in range(14,rsheet.nrows):
 
                 amp_article=extract_string_between_tag (html_base,'<article>','</article>') #{{amp-article}}
 
-# В новых файлах <div class="official"> находится внутри article 
+# В новых файлах <div class="official"> находится внутри article
 #  offical может не быть вообще ЕСТЬ!, может быть внутри article (в новых файлах), может быть отдельным блоком в старых
 
-                
+
                 if html_base.find('Скачать официальный текст')==-1 \
                 or amp_article.find('Скачать официальный текст')>-1\
-                or amp_article.find('<div class="official')>-1: 
+                or amp_article.find('<div class="official')>-1:
                 # если нет вообще или уже внутри <article>, то добавляем в article все, что между <article> и <footer>
                     amp_after_article=extract_string_between_tag (html_base,'</article>', '<footer>').strip()
                     amp_after_article=amp_after_article.replace('</div>', ' ').strip()
@@ -225,7 +226,7 @@ for str_num in range(14,rsheet.nrows):
                     amp_after_article=extract_string_between_tag (html_base,'</article>', '<div class="official">').strip()
                     amp_after_article=amp_after_article.replace('</div>', ' ').strip()
                     amp_article=amp_article+'\n'+amp_after_article
-                    # Сам официальный текст 
+                    # Сам официальный текст
                     amp_offical='<div class="official">\n'+extract_string_between_tag (html_base,'<div class="official">','</table>')+'</table>\n</div>\n</div>'
                     amp_offical=amp_offical.replace('style="font-size:75%"','')
                     amp_offical=amp_offical.replace('h2>', 'h3>')
@@ -234,11 +235,11 @@ for str_num in range(14,rsheet.nrows):
                 schet_for_replace=extract_string_between_tag(amp_article, 'a href="', '"')
                 if schet_for_replace.find('Schet')>-1:
                     amp_article=amp_article.replace(schet_for_replace, '../stat/'+amp_order_with_attributes)
-                tag_for_replace=extract_string_between_tag(amp_article, r'<a href=', r'>')   
+                tag_for_replace=extract_string_between_tag(amp_article, r'<a href=', r'>')
 
-                adapt_article=amp_article   # Потому, что в amp_article позже происходит замена ссылок     
+                adapt_article=amp_article   # Потому, что в amp_article позже происходит замена ссылок
                 adapt_remark=amp_remark
-                
+
                 # Формируем базу данных
                 # Записываем текст article и remark в файл html (для последующего редактирования)
 
@@ -252,7 +253,7 @@ for str_num in range(14,rsheet.nrows):
                     fhtml.write('<article>\n\t')
                     fhtml.write(adapt_article.replace('\n','\n\t')+'\n')
                     fhtml.write('</article>')
-                    
+
 
 
                 file_amp_remark=file_amp_article=str(os.path.join(check_folder,'remark-and_article.html'))
@@ -336,38 +337,38 @@ for str_num in range(14,rsheet.nrows):
                 #list_changed_url+='\n'
                 # Записываем amp  файл в новый каталог
                 new_folder=os.path.join(os.path.dirname(__file__), 'new')
-                
+
                 if  not os.path.exists (new_folder):  #Если нет каталога new, создаем его
-                   os.mkdir(new_folder)     
+                   os.mkdir(new_folder)
 
                 new_folder=os.path.join(new_folder,  url_z.split('/')[3])
-    
+
                 if  not os.path.exists (new_folder):
                    os.mkdir(new_folder)     #создаем  папку документа в каталоге new
-                                   
+
                 new_amp_folder=os.path.join(new_folder, 'amp')
                 if not os.path.exists (new_amp_folder):
-                    os.mkdir(new_amp_folder)     
+                    os.mkdir(new_amp_folder)
 
 
 
-                
+
                 with open(os.path.join(new_amp_folder,'index.html'), 'w', encoding="utf-8") as fp:
-                    fp.write(template)    
+                    fp.write(template)
 
 
 
                 with open(os.path.join(check_amp_folder,'amp-index.html'), 'w', encoding="utf-8") as fp:
                     fp.write(template)
 
-                
-                
+
+
                 with open(os.path.join(check_amp_folder,'amp-index.html'), 'w', encoding="utf-8") as fp:
                     fp.write(template)
-                
-                    
-                    
-                    
+
+
+
+
 #********************************** Создаем адаптивную страницу******************************
                 with open ('adapt-template.html', 'r', encoding="utf-8") as fadapt:
                     template=fadapt.read()
@@ -399,29 +400,29 @@ for str_num in range(14,rsheet.nrows):
                 amp_article=amp_article.replace('<a href="','<a href="../')
                 amp_article=amp_article.replace("<a href='","<a href='../")
                 template=template.replace('{{adapt-article}}', adapt_article)
-                
+
                 with open(os.path.join(check_folder,'adapt-index.html'), 'w', encoding="utf-8") as fnew:
-                    fnew.write(template)       
+                    fnew.write(template)
 
                 with open(os.path.join(new_folder,'index.html'), 'w', encoding="utf-8") as fp:
-                    fp.write(template)           
+                    fp.write(template)
 
-                
+
                 for temp_keys in total_json:   # Удаляем знаки табуляции
                     total_json[temp_keys]=total_json[temp_keys].replace('\t','')
                 #total_json_string=json.dumps(total_json, ensure_ascii=False).encode('utf8')
 
                 if not os.path.exists(check_amp_folder):
                     os.mkdir(check_amp_folder)
-               
+
                 with open (os.path.join(check_folder,'json.txt'), 'w', encoding="utf-8") as js:
                     json.dump(total_json, js, ensure_ascii=False, indent=4)
                 #    js.write(total_json_string.decode())
-               
 
 
 
-                # проверяем, есть ли ссылка в sitemap.xml    
+
+                # проверяем, есть ли ссылка в sitemap.xml
                 beg=temp_map.find(canonical_adress)
                 if beg>-1:
                     beg_old_time=temp_map.find('<lastmod>', beg)
@@ -430,8 +431,8 @@ for str_num in range(14,rsheet.nrows):
                     #print (old_date)
                     #print('<lastmod>'+amp_dateModified+'</lastmod>')
                     temp_map=temp_map[:beg_old_time]+'    <lastmod>'+amp_dateModified+'</lastmod>'+temp_map[end__old_time:]
-                    
-                    
+
+
 
 with open (os.path.join(current_dir, 'change.txt'), 'w', encoding="utf-8") as flikns:
     flikns.write(list_changed_url)
