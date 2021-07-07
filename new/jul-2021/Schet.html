@@ -241,47 +241,94 @@ input::-webkit-inner-spin-button {
 			<td width="10%">Сумма к<br> оплате, руб.</td>
 		</tr>
 <script>
-	var itemList= ["2.09","6.02","3.06",];
+	var itemList= ["1.02","3.05","3.11","3.01","9.13",];
 </script>
 		
 
-<!--  Правила электроснабжения  -->		
-		<tr id="2.09" class="unprintable">
+<!--  Котлы до 115  -->		
+		<tr id="1.02" class="unprintable">
 			<td  width="5%">1.</td>
-			<td width="45%" id="2.09_name" style="text-align: left; padding-left: 1em;">Правила электроснабжения (изм. 2020)</td>
-			<td width="10%" id="2.09_base_price">17.80</td>
-			<td width="10%"><input  tabindex="1" id="2.09_input_count" type="number" min="0" max="999" value="0" title="Введите необходимое Вам количество экз." oninput='sum_calculate(this.value,"2.09", 17.80, {"10": "15","50": "25","100": "35"} )'></td>
-			<td width="10%"><span id="2.09_discPercent"> &mdash;</span></td>
-			<td width="10%" id="2.09_sum_disc">&mdash;</td>
-			<td width="10%"><span id="2.09_sum_k_opl">&mdash;</span></td>
+			<td width="45%" id="1.02_name" style="text-align: left; padding-left: 1em;">Правила по&nbsp;обеспечению промышленной безопасности котельных с&nbsp;установленными в&nbsp;них&nbsp;паровыми котлами с&nbsp;давлением пара не&nbsp;более 0,07&nbsp;МПа&nbsp;и&nbsp;водогрейными котлами с&nbsp;температурой нагрева воды не&nbsp;выше 115&nbsp;°C&nbsp;(2021)</td>
+			<td width="10%" id="1.02_base_price">19.29</td>
+			<td width="10%"><input  tabindex="1" id="1.02_input_count" type="number" min="0" max="999" value="0" title="Введите необходимое Вам количество экз." oninput='sum_calculate(this.value,"1.02", 19.29, {"10": "15","50": "25","100": "35"} )'></td>
+			<td width="10%"><span id="1.02_discPercent"> &mdash;</span></td>
+			<td width="10%" id="1.02_sum_disc">&mdash;</td>
+			<td width="10%"><span id="1.02_sum_k_opl">&mdash;</span></td>
 
 		</tr>		
 
-<!--  Правила по обеспечению промышленной безопасности при разработке месторождений полезных ископаемых открытым способом (2020 г.)  -->		
-		<tr id="6.02" class="unprintable">
+<!--  Лифты 2021  -->		
+		<tr id="3.05" class="unprintable">
 			<td  width="5%">2.</td>
-			<td width="45%" id="6.02_name" style="text-align: left; padding-left: 1em;">Правила по обеспечению промышленной безопасности при разработке месторождений полезных ископаемых открытым способом (2020 г.)</td>
-			<td width="10%" id="6.02_base_price">14.30</td>
-			<td width="10%"><input  tabindex="2" id="6.02_input_count" type="number" min="0" max="999" value="0" title="Введите необходимое Вам количество экз." oninput='sum_calculate(this.value,"6.02", 14.30, {"10": "15","50": "25","100": "35"} )'></td>
-			<td width="10%"><span id="6.02_discPercent"> &mdash;</span></td>
-			<td width="10%" id="6.02_sum_disc">&mdash;</td>
-			<td width="10%"><span id="6.02_sum_k_opl">&mdash;</span></td>
+			<td width="45%" id="3.05_name" style="text-align: left; padding-left: 1em;">Правила по&nbsp;обеспечению промышленной безопасности лифтов, строительных грузопассажирских подъемников, эскалаторов, конвейеров пассажирских&nbsp;(2021)</td>
+			<td width="10%" id="3.05_base_price">24.16</td>
+			<td width="10%"><input  tabindex="2" id="3.05_input_count" type="number" min="0" max="999" value="0" title="Введите необходимое Вам количество экз." oninput='sum_calculate(this.value,"3.05", 24.16, {"10": "15","50": "25","100": "35"} )'></td>
+			<td width="10%"><span id="3.05_discPercent"> &mdash;</span></td>
+			<td width="10%" id="3.05_sum_disc">&mdash;</td>
+			<td width="10%"><span id="3.05_sum_k_opl">&mdash;</span></td>
 
 		</tr>
 
-<!--  Правила по обеспечению промышленной безопасности при эксплуатации технологических трубопроводов (2020 г.)  -->		
-		<tr id="3.06" class="unprintable">
+<!--  Закон о промышленной безопасности 2021  -->		
+		<tr id="3.11" class="unprintable">
 			<td  width="5%">3.</td>
-			<td width="45%" id="3.06_name" style="text-align: left; padding-left: 1em;">Правила по обеспечению промышленной безопасности при эксплуатации технологических трубопроводов (2020 г.)</td>
-			<td width="10%" id="3.06_base_price">18.60</td>
-			<td width="10%"><input  tabindex="2" id="3.06_input_count" type="number" min="0" max="999" value="0" title="Введите необходимое Вам количество экз." oninput='sum_calculate(this.value,"3.06", 18.60, {"10": "15","50": "25","100": "35"} )'></td>
-			<td width="10%"><span id="3.06_discPercent"> &mdash;</span></td>
-			<td width="10%" id="3.06_sum_disc">&mdash;</td>
-			<td width="10%"><span id="3.06_sum_k_opl">&mdash;</span></td>
+			<td width="45%" id="3.11_name" style="text-align: left; padding-left: 1em;">Закон «О&nbsp;промышленной безопасности»&nbsp;(2021)</td>
+			<td width="10%" id="3.11_base_price">12.69</td>
+			<td width="10%"><input  tabindex="2" id="3.11_input_count" type="number" min="0" max="999" value="0" title="Введите необходимое Вам количество экз." oninput='sum_calculate(this.value,"3.11", 12.69, {"10": "15","50": "25","100": "35"} )'></td>
+			<td width="10%"><span id="3.11_discPercent"> &mdash;</span></td>
+			<td width="10%" id="3.11_sum_disc">&mdash;</td>
+			<td width="10%"><span id="3.11_sum_k_opl">&mdash;</span></td>
 
 		</tr>		
 
-						
+
+
+<!--  Сборник промышленная безопасность  -->		
+		<tr id="3.01" class="unprintable">
+			<td  width="5%">4.</td>
+			<td width="45%" id="3.01_name" style="text-align: left; padding-left: 1em;">СБОРНИК «Промышленная безопасность»&nbsp;(2021)</td>
+			<td width="10%" id="3.01_base_price">24.25</td>
+			<td width="10%"><input  tabindex="2" id="3.01_input_count" type="number" min="0" max="999" value="0" title="Введите необходимое Вам количество экз." oninput='sum_calculate(this.value,"3.01", 24.25, {"10": "15","50": "25","100": "35"} )'></td>
+			<td width="10%"><span id="3.01_discPercent"> &mdash;</span></td>
+			<td width="10%" id="3.01_sum_disc">&mdash;</td>
+			<td width="10%"><span id="3.01_sum_k_opl">&mdash;</span></td>
+
+		</tr>		
+
+
+
+		<!--  Сборник Несчастные случаи  -->		
+		<tr id="9.13" class="unprintable">
+			<td  width="5%">5.</td>
+			<td width="45%" id="9.13_name" style="text-align: left; padding-left: 1em;">СБОРНИК «Расследование и&nbsp;учет несчастных случаев на производстве и профессиональных заболеваний»&nbsp;(2021)</td>
+			<td width="10%" id="9.13_base_price">16.87</td>
+			<td width="10%"><input  tabindex="2" id="9.13_input_count" type="number" min="0" max="999" value="0" title="Введите необходимое Вам количество экз." oninput='sum_calculate(this.value,"9.13", 16.87, {"10": "15","50": "25","100": "35"} )'></td>
+			<td width="10%"><span id="9.13_discPercent"> &mdash;</span></td>
+			<td width="10%" id="9.13_sum_disc">&mdash;</td>
+			<td width="10%"><span id="9.13_sum_k_opl">&mdash;</span></td>
+
+		</tr>		
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 	
 		
