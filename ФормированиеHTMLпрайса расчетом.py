@@ -16,8 +16,8 @@ god=now[:4]
 new_name='Price Energopress TNPA '+den+'-'+mes+'-'+god+'.xls'
 new_nameJ='Price Energopress Journals '+den+'-'+mes+'-'+god+'.xls'
 #path=r'\\Buh\подписка\Прайсы'
-path=''
-price=r'Price Energopress TNPA 01-09-2021.xls'
+path=r'price'
+price=r'Price Energopress TNPA 25-09-2021.xls'
 
 #Создаем HTML страницу из файла прайса
 
@@ -44,7 +44,7 @@ idList=''
 with open ('part1.html', 'r', encoding="utf-8") as fl:
     part1=fl.read()
 
-part1=re.sub('{{Price}}',price, part1)
+part1=re.sub('{{Price}}','/price/'+price, part1)
 
 
 fp.write(part1)
