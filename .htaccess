@@ -35,4 +35,34 @@ Redirect 301 /pikoap https://enp.by/processualno-ispolnitelnyj-kodeks-respubliki
 Redirect 301 /pikoap/ https://enp.by/processualno-ispolnitelnyj-kodeks-respubliki-belarus-ob-administrativnyh-pravonarusheniyah/
 
 
+Redirect 301 /lift/ https://enp.by/pravila-po-obespecheniyu-promyshlennoj-bezopasnosti-liftov-stroitelnyh-gruzopassazhirskih-podemnikov-ehskalatorov-konvejerov-passazhirskih/
+Redirect 301 /lift https://enp.by/pravila-po-obespecheniyu-promyshlennoj-bezopasnosti-liftov-stroitelnyh-gruzopassazhirskih-podemnikov-ehskalatorov-konvejerov-passazhirskih/
+
+
+Redirect 301 /do115/ https://enp.by/pravila-promyshlennoj-bezopasnosti-kotelnyh-s-davleniem-para-ne-bolee-0-07-mpa-i-temperaturoj-nagreva-vody-ne-vyshe-115/
+Redirect 301 /do115 https://enp.by/pravila-promyshlennoj-bezopasnosti-kotelnyh-s-davleniem-para-ne-bolee-0-07-mpa-i-temperaturoj-nagreva-vody-ne-vyshe-115/
+
+
+Redirect 301 /zprb https://enp.by/zakon-o-promyshlennoj-bezopasnosti/
+Redirect 301 /zprb/ https://enp.by/zakon-o-promyshlennoj-bezopasnosti/
+
+Redirect 301 /sbornikprb https://enp.by/sbornik-promyshlennaya-bezopasnost/
+Redirect 301 /sbornikprb/ https://enp.by/sbornik-promyshlennaya-bezopasnost/
+
+Redirect 301 /adr/ https://enp.by/pravila-po-obespecheniyu-bezopasnosti-perevozki-opasnyh-gruzov-avtomobilnym-transportom/
+Redirect 301 /adr https://enp.by/pravila-po-obespecheniyu-bezopasnosti-perevozki-opasnyh-gruzov-avtomobilnym-transportom/
+
+Redirect 301 /pot/ https://enp.by/pravila-po-ohrane-truda/
+Redirect 301 /pot https://enp.by/pravila-po-ohrane-truda/
+
+Redirect 301 /bur https://enp.by/pravila-po-obespecheniyu-promyshlennoj-bezopasnosti-pri-burenii-skvazhin/
+Redirect 301 /bur/ https://enp.by/pravila-po-obespecheniyu-promyshlennoj-bezopasnosti-pri-burenii-skvazhin/
+
+
+Redirect 301 /krany https://enp.by/pravila-po-obespecheniyu-promyshlennoj-bezopasnosti-gruzopodemnyh-kranov/
+Redirect 301 /krany/ https://enp.by/pravila-po-obespecheniyu-promyshlennoj-bezopasnosti-gruzopodemnyh-kranov/
+
+Redirect 301 /leto-2021/ https://enp.by/
+Redirect 301 /leto-2021 https://enp.by/
+
 
