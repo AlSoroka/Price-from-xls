@@ -3,9 +3,24 @@
         <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
     <loc>https://enp.by/</loc>
-    <lastmod>2020-07-28T14:45:30+01:00</lastmod>
+    <lastmod>2022-01-04T14:45:30+01:00</lastmod>
     <priority>1.0</priority>
 </url>
+
+
+
+
+<url>
+    <loc>https://enp.by/nalogovyj-kodeks/</loc>
+                <lastmod>2022-01-04T16:05:19+03:00</lastmod>
+    <priority>0.8</priority>
+</url>
+
+
+
+
+
+
 
 <url>
     <loc>https://enp.by/elektrobezopasnost-v-respublike-belarus/</loc>
@@ -115,12 +130,6 @@
     <priority>0.8</priority>
 </url>
 
-
-<url>
-    <loc>https://enp.by/nalogovyj-kodeks/</loc>
-                <lastmod>2021-04-19T16:05:19+03:00</lastmod>
-    <priority>0.8</priority>
-</url>
 
 
 
@@ -692,7 +701,7 @@
 </url>
 <url>
     <loc>https://enp.by/tkp-336/</loc>
-                <lastmod>2021-04-19T16:05:19+03:00</lastmod>
+                <lastmod>2022-01-04T16:05:19+03:00</lastmod>
     <priority>0.8</priority>
 </url>
 <url>
