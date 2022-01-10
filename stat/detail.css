@@ -1,0 +1,729 @@
+/* cyrillic-ext */
+@font-face {
+  font-family: 'Roboto';
+  font-style: italic;
+  font-weight: 400;
+  src: local('Roboto Italic'), local('Roboto-Italic'), url(https://fonts.gstatic.com/s/roboto/v20/KFOkCnqEu92Fr1Mu51xFIzIFKw.woff2) format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+
+
+/* cyrillic-ext */
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Roboto'), local('Roboto-Regular'), url(https://fonts.gstatic.com/s/roboto/v20/KFOmCnqEu92Fr1Mu72xKOzY.woff2) format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+
+/* cyrillic */
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 700;
+  src: local('Roboto Bold'), local('Roboto-Bold'), url(https://fonts.gstatic.com/s/roboto/v20/KFOlCnqEu92Fr1MmWUlfABc4EsA.woff2) format('woff2');
+  unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+
+
+
+
+ body
+    {
+    background-color: #FFFFFF;
+    margin: 0px 0px 0px 0px;
+    min-width: 100%;
+    padding: 0px 0px 0px 0px;
+    font-size:14px;
+    font-family: 'Roboto', sans-serif;
+    line-height: 22px;
+    }
+
+ p  {
+        margin: 15px;
+    }
+ table
+    {
+        border-collapse: collapse;
+        border-style:hidden;
+    }
+
+ td, th
+ {
+    border-bottom: 1px solid gray;
+    border-top: 1px solid gray;
+    padding: .25em;
+ }
+
+ tr:first-of-type
+ {
+    border-top: 1px solid gray;
+ }
+
+
+
+
+
+ li
+ {
+    margin-bottom: 5px;
+    line-height: 20px;
+ }
+
+ol {
+/* убираем стандартную нумерацию */
+list-style: none;
+/* Идентифицируем счетчик и даем ему имя li. Значение счетчика не указано - по умолчанию оно равно 0 */
+counter-reset: li;
+}
+ol li:before {
+/* Определяем элемент, который будет нумероваться — li. Псевдоэлемент before указывает, что содержимое, вставляемое при помощи свойства content, будет располагаться перед пунктами списка. Здесь же устанавливается значение приращения счетчика (по умолчанию равно 1). */
+counter-increment: li;
+/* С помощью свойства content выводится номер пункта списка. counters() означает, что генерируемый текст представляет собой значения всех счетчиков с таким именем. Точка в кавычках добавляет разделяющую точку между цифрами, а точка с пробелом добавляется перед содержимым каждого пункта списка */
+content: counters(li,".") ". ";
+}
+
+a {
+color:#4682B4;
+
+}
+
+
+
+/*  Меню*/
+
+nav
+    {
+    position: fixed;
+    top:0;
+    background: #FFFFFF;
+    width: 100%;
+    margin:0; /*обнуляем отступы*/
+    padding:0; /*обнуляем отступы*/
+    text-align:center;
+    /*border-top: solid 2px white;*/
+    /*display:none;*/
+    }
+
+
+
+menu {
+    margin:0; /*обнуляем отступы*/
+    margin-left: calc((100% - 768px)/2);
+    padding:0; /*обнуляем отступы*/
+    /*float:left; выравниваем список по левому краю*/
+    width:100%;/*задаем ширину авто исходя из типа и содержимого списка*/
+    list-style:none; /*удаляем маркеры списка*/
+    font-size:.9rem; /*задаем размер шрифта*/
+    font-family: 'Roboto', sans-serif; /*устанавливаем шрифт*/
+
+}
+
+menu li {
+       margin:0; /*обнуляем отступы*/
+       padding:0; /*обнуляем отступы*/
+       float:left; /*выравниваем элементы списка по левому краю*/
+       border-bottom: none;
+
+       }
+
+
+
+menu a {
+      display:inline-block; /*представляем ссылки меню как блочные элементы*/
+      width:192px; /* задаем размер блока*/
+      padding:3px 0;
+      height:100%; /*и высоту блока*/
+      text-align:center; /*надпись по центру*/
+      line-height: 2.1rem; /*межстрочный интервал*/
+      text-decoration:none; /*убираем подчеркивание у ссылок*/
+      color:#696969; /*цвет текста ссылок - белый*/
+      font-weight:600;
+
+
+}
+
+
+menu a:hover {
+            color:#696969;
+            font-weight:600;
+
+            }
+
+
+
+
+
+menu li a.active {
+  position: relative;
+  color: #6495ED;
+  /*border:0;*/
+  font-weight:600;
+  border-bottom: solid 2px #6495ED;
+}
+
+
+
+
+
+/*    Конец меню */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ h1
+  {
+  padding-top:2rem;
+  line-height: 2rem;
+  }
+  h2
+  {
+    text-align:center;
+    padding-top: .5rem;
+
+  }
+ /*h1
+  {
+  display:inline-block;
+  width: 80%;
+  float:left;
+  }*/
+
+ .ClsWindReturn
+    {
+    float:right;
+    color:red;
+    border:solid .5px red;
+    font-size:1.5rem;
+    padding:.5rem;
+    cursor:pointer;
+    }
+
+
+
+
+
+ h3
+  {
+  text-align:center;
+  }
+
+article
+    {
+        font-size:1rem;
+        padding: 0 1.5rem;
+
+    }
+article p
+    {
+    margin: 1rem 0;
+    }
+article ol, article ul
+    {
+        padding:0 2rem;
+        margin:0;
+        /*text-indent:1rem;*/
+    }
+
+article table
+    {
+        background-color: #DCDCDC;
+        border-top: none;
+        border-bottom: none;
+    }
+/*
+article table:first-of-type
+ {
+    border-top: none;
+
+ }
+
+article table:last-of-type
+ {
+    border-bottom: none;
+ }
+*/
+
+.official {
+    padding: 0 0 15px 0;
+    background-color:#DCDCDC;
+    width: 100%;
+    margin: 15px auto;
+        }
+
+
+
+.col25
+    {
+    width:25%;
+    /*font-size:.8rem;
+    line-height:1rem;*/
+    }
+
+
+.col75
+    {
+    width:75%;
+    padding-left:2rem;
+    /*line-height:1rem;
+    font-size:.8rem;*/
+    }
+
+input:focus {
+  color: #000000;
+  border: 1px solid #52a8ec;
+}
+
+/*  Убираем стрелки для тегов input type="number" */
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button
+    {
+    -webkit-appearance: none;
+    }
+
+input[type='number']
+    {
+    -moz-appearance:textfield;
+    }
+
+
+input {
+    width:3em;
+    text-align:center;
+    border: 1px solid #ff9900;
+    font-size:1.2rem;
+    }
+
+
+
+
+
+/*td ul*/
+ul
+    {
+    padding: 0; /* Убираем поля */
+    margin-left: 0; /* Отступ слева */
+   }
+
+td ul li
+    {
+    line-height:1rem;
+    }
+
+#descr
+{
+width:768px;
+margin:auto;
+
+}
+.descript
+    {
+    clear: both;
+    padding: 1rem;
+    background-color:#f5f5f5;
+    }
+
+.mainNews /* Главные новости */
+{
+-webkit-box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.75);
+-moz-box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.75);
+box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.75);
+background-color:#FFFFFF;
+padding:1rem 2rem;
+}
+
+.explan /* Пояснения */
+{
+background-color:#DCDCDC;
+padding:.5rem 1rem 1rem;
+margin:-.8rem .8rem 1.5rem .8rem;
+/*margin: .2rem .2rem .2rem;*/
+font-size:85%;
+line-height:130%;
+
+border-bottom: solid  #D3D3D3 1px;
+
+
+}
+
+
+
+#pageDate
+{ text-align: right;
+font-size:.8rem;
+background-color:#1E90FF;
+color:white;
+padding-right:.5rem;
+}
+
+
+#imgCover
+{
+width:250px;
+float:left;
+text-align:left;
+margin-right:5px, 5px, 5px, 0;
+
+}
+#imgCover img{
+    -webkit-box-shadow: 5px 5px 5px 0px rgba(148,148,148,1);
+    -moz-box-shadow: 5px 5px 5px 0px rgba(148,148,148,1);
+    box-shadow: 5px 5px 5px 0px rgba(148,148,148,1);
+}
+#details
+{
+width:460px;
+float:right;
+margin-top:1rem;
+}
+
+#phon
+{
+padding: 0;
+width: 768px;
+margin: 15px auto;
+}
+
+
+#knopka2
+{
+display: none;
+}
+
+
+
+input:focus {
+  color: #000000;
+  border: 1px solid #52a8ec;
+}
+
+.changes tr:nth-child(2n), .changes tr:nth-child(2n+1)
+    {
+        border-top: solid 1px black;
+    }
+
+
+
+
+.footer
+    {
+    text-align:center;
+    width:99%;
+    position:fixed;
+    bottom:0;
+    font-size:.75rem;
+    line-height: 1.5rem;
+    background-color: white;
+    padding:0 10px;
+    margin:auto;
+    }
+.footer a
+    {
+    text-decoration: none;
+    }
+
+a.butt8 {
+  width:6rem;
+  display: inline-block;
+  font-size: .8rem;
+  color: rgba(255,255,255,1);
+  text-shadow: #2e7ebd 0 1px 2px;
+  text-decoration: none;
+  text-align: center;
+  line-height: 1.1;
+  /*white-space: pre-line;*/
+  padding: .7em;
+  border: 1px solid;
+  border-color: #008B8B #2970a9 #2970a9 #008B8B;
+  border-radius: 6px;
+  outline: none;
+  background-color: #1E90FF;
+  /*background: #008B8B linear-gradient(#7bc3c3, #008B8B 50%, #7bc3c3);
+  box-shadow: inset rgba(255,255,255,.5) 1px 1px;*/
+  margin-left:.5rem;
+}
+
+a.butt8:hover {
+  color: rgb(255,255,255);
+  background-color: #191970;
+  font-weight: bold;
+  cursor: pointer;
+  }
+a.butt8:active {
+  color: rgb(255,255,255);
+  border-color: #2970a9;
+  background-color: #800000;
+  box-shadow: none;
+}
+
+
+
+
+a.butt7 {
+  width:6rem;
+  display: inline-block;
+  font-size: .8rem;
+  color: rgba(255,255,255,1);
+  text-shadow: #2e7ebd 0 1px 2px;
+  text-decoration: none;
+  text-align: center;
+  line-height: 1.1;
+  /*white-space: pre-line;*/
+  padding: .2em;
+  border: 1px solid;
+  border-color: #008B8B #2970a9 #2970a9 #008B8B;
+  border-radius: 3px;
+  outline: none;
+  background-color: #1E90FF;
+  /*background: #008B8B linear-gradient(#7bc3c3, #008B8B 50%, #7bc3c3);
+  box-shadow: inset rgba(255,255,255,.5) 1px 1px;*/
+  margin-left:.5rem;
+}
+
+a.butt7:hover {
+  color: rgb(255,255,255);
+  background-color: #4682B4;
+  font-weight: bold;
+  cursor: pointer;
+  }
+a.butt7:active {
+  color: rgb(255,255,255);
+  border-color: #2970a9;
+  background-color: #800000;
+  box-shadow: none;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ /* свойства модального окна по умолчанию */
+ .modal {
+     position: fixed; /* фиксированное положение */
+     top: 0;
+     right: 0;
+     bottom: 0;
+     left: 0;
+     background: rgba(0, 0, 0, 0.5); /* цвет фона */
+     z-index: 1050;
+     opacity: 0; /* по умолчанию модальное окно прозрачно */
+     /*-webkit-transition: opacity 400ms ease-in;
+     -moz-transition: opacity 400ms ease-in;
+     transition: opacity 400ms ease-in;  анимация перехода */
+     pointer-events: none; /* элемент невидим для событий мыши */
+ }
+
+ /* при отображении модального окно */
+ .modal:target {
+     opacity: 1;
+     pointer-events: auto;
+     overflow-y: auto;
+ }
+
+ /* ширина модального окна и его отступы от экрана */
+ .modal-dialog {
+     position: relative;
+     width: auto;
+     margin: 10px;
+ }
+
+ @media (min-width: 576px) {
+     .modal-dialog {
+         max-width: 500px;
+         margin: 30px auto;
+     }
+ }
+
+ /* свойства для блока, содержащего контент модального окна */
+ .modal-content {
+     position: relative;
+     display: -webkit-box;
+     display: -webkit-flex;
+     display: -ms-flexbox;
+     display: flex;
+     -webkit-box-orient: vertical;
+     -webkit-box-direction: normal;
+     -webkit-flex-direction: column;
+     -ms-flex-direction: column;
+     flex-direction: column;
+     background-color: #fff;
+     -webkit-background-clip: padding-box;
+     background-clip: padding-box;
+     border: 1px solid rgba(0, 0, 0, .2);
+     border-radius: .3rem;
+     outline: 0;
+     text-align:center;
+ }
+
+ @media (min-width: 768px) {
+     .modal-content {
+         -webkit-box-shadow: 0 5px 15px rgba(0, 0, 0, .5);
+         box-shadow: 0 5px 15px rgba(0, 0, 0, .5);
+     }
+ }
+
+ /* свойства для заголовка модального окна */
+ .modal-header {
+     display: -webkit-box;
+     display: -webkit-flex;
+     display: -ms-flexbox;
+     display: flex;
+     -webkit-box-align: center;
+     -webkit-align-items: center;
+     -ms-flex-align: center;
+     align-items: center;
+     -webkit-box-pack: justify;
+     -webkit-justify-content: space-between;
+     -ms-flex-pack: justify;
+     justify-content: space-between;
+     padding: 15px;
+     border-bottom: 1px solid #eceeef;
+ }
+
+ .modal-title {
+     margin-top: 0;
+     margin-bottom: 0;
+     line-height: 1.5;
+     font-size: 1.25rem;
+     font-weight: 500;
+ }
+
+ /* свойства для кнопки "Закрыть" */
+ .close {
+     float: right;
+     font-family: 'Roboto', sans-serif;
+     font-size: 24px;
+     font-weight: 700;
+     line-height: 1;
+     color: red;
+     text-shadow: 0 1px 0 #fff;
+     opacity: .5;
+     text-decoration: none;
+
+ }
+
+ /* свойства для кнопки "Закрыть" при нахождении её в фокусе или наведении */
+ .close:focus, .close:hover {
+     color: #000;
+     text-decoration: none;
+     cursor: pointer;
+     opacity: .75;
+ }
+
+ /* свойства для блока, содержащего основное содержимое окна */
+ .modal-body {
+     position: relative;
+     -webkit-box-flex: 1;
+     -webkit-flex: 1 1 auto;
+     -ms-flex: 1 1 auto;
+     flex: 1 1 auto;
+     padding: 15px;
+     overflow: auto;
+ }
+
+
+/*  Блок для официальных текстов нормативных документов*/
+ .normativAct{
+     font-size:85%;
+     background-color:#FFFFFF;
+     padding:1rem;
+ }
+
+/* Спан для  выделения слова ИЗВЛЕЧЕНИЕ */
+.extract {
+color:red;
+
+
+}
+
+/* Строка подзаголовка "Национальный реестр ..."*/
+ .natReestr {
+     text-align:center;
+     font-style:  italic;
+     font-weight: bold;
+     font-size:90%;
+     margin:0;
+     padding:0;
+ }
+/* Блок подзаголовка "изменения и дополнения" */
+  .changeadd {
+     text-align:left;
+     /*font-style: italic;*/
+     font-size:85%;
+     margin:0;
+     padding:0 4rem;
+     line-height:120%;
+ }
+
+ .changeadd p  {
+    margin:.8rem;
+
+ }
+  .changeadd p:first-child  {
+    font-weight:bold;
+    text-indent:-2rem;
+
+ }
+
+
+/*Для законов подзаголовок "Принят Палатой..., Одобрен Советом..."*/
+ .prinodobren  {
+     text-align:left;
+     font-style:  italic;
+
+ }
+
+/*Класс для спана со словосочетанием "выделены голубым цветом" */
+ .SelectChanges {
+     color:#4169E1;
+     font-weight:500;
+
+ }
+
+ /* Класс для комментариев в документы */
+ .annotation {
+     background-color:#F0F8FF;
+     padding:.2rem;
+     margin:.1rem 2rem 1rem 2rem;
+     font-size:90%;
+     line-height:130%;
+ }
+
+.author {
+     text-align:right;
+     font-style: italic;
+ }
+
+
