@@ -229,7 +229,7 @@ input:focus {
 			<b>УНП</b>: 190 399 602<br>
 			<b><nowrap>р/с</b> BY91OLMP30120000184910000933</nowrap><br> 
 			в ОАО Белгазпромбанк, г. Минск, <nowrap><b>БИК</b>: OLMPBY2X</nowrap><br> 
-			<b>Адрес</b>: 220140, г. Минск, ул. Матусевича 20-34 <br>
+			<b>Адрес</b>: 220121, г. Минск, ул. Матусевича 23-213 <br>
 			<b>тел.</b>: <nowrap>(017) 385-94-44</nowrap>, <nowrap>(029) 385-96-66</nowrap>
 		</td>
 		
@@ -247,7 +247,11 @@ input:focus {
 	 <td>
 		<b>Заказчик:</b> <span id="custumer_name"></span> 
 		<br>
-		<b>УНП:</b> <span id="custumer_unp"></span>
+		<b>УНП: </b> <span id="custumer_unp"></span> 
+		<br>
+		<b>Адрес:</b> <span id="custumer_adr"></span>
+		<br>
+		<b>e-mail:</b> <span id="custumer_email"></span>
 		</td>
 	 </tr>
 	 
@@ -306,8 +310,10 @@ input:focus {
 		  {
 			document.getElementById("custumer").style.display = "table-row"; //Если да, включаем строку для покупателя
 			document.getElementById("custumer_name").innerHTML = params[3].split("=")[1] //Вставляем название (должно быть третьим параметром) 
-			document.getElementById("custumer_unp").innerHTML = params[4].split("=")[1] //Вставляем УНП (должно быть четвертым параметром) 
-			//?title=Налоговый кодекс (2022)&price=99.60&order_numb=12.2&name=Минский механический завод им. С. И. Вавилова -управляющая компания холдинга "БелОМО", ОАО&Unp=100185185
+			document.getElementById("custumer_unp").innerHTML = Math.floor(params[4].split("=")[1]) //Вставляем УНП (должно быть четвертым параметром) 
+			document.getElementById("custumer_adr").innerHTML = params[5].split("=")[1] //Вставляем адрес (должно быть пятым параметром) 
+			document.getElementById("custumer_email").innerHTML = params[6].split("=")[1] //Вставляем e-mail (должно быть шестым параметром) 
+			//?title=Налоговый кодекс (2022)&price=99.60&order_numb=12.2&name=Минский механический завод им. С. И. Вавилова -управляющая компания холдинга "БелОМО", ОАО&Unp=100185185&adr=Минск, Матусевича 23-213&e-mail=zakaz@energetika.by
 		  }
 		
 			if_custumer=params[3].split("=")[1]
