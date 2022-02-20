@@ -17,7 +17,7 @@ new_name='Price Energopress TNPA '+den+'-'+mes+'-'+god+'.xls'
 new_nameJ='Price Energopress Journals '+den+'-'+mes+'-'+god+'.xls'
 #path=r'\\Buh\подписка\Прайсы'
 path=r'price'
-price=r'Price Energopress TNPA 04-01-2022.xls'
+price=r'Price Energopress TNPA 21-01-2022.xls'
 
 #Создаем HTML страницу из файла прайса
 
